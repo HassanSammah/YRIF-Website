@@ -50,7 +50,7 @@ const Features = () => {
                         return (
                             <div key={index} className="glass-card p-8 rounded-3xl hover:border-brand-teal/30 hover:-translate-y-2 group cursor-pointer">
                                 <div className="w-14 h-14 bg-brand-light rounded-2xl flex items-center justify-center mb-6 group-hover:bg-brand-navy transition-colors duration-300">
-                                    <Icon className="text-brand-gold group-hover:text-brand-navy transition-colors duration-300" size={28} />
+                                    <Icon className="text-brand-gold group-hover:text-white transition-colors duration-300" size={28} />
                                 </div>
                                 <h3 className="font-display text-2xl font-bold text-brand-navy mb-3">{feature.title}</h3>
                                 <p className="text-text-secondary leading-relaxed">

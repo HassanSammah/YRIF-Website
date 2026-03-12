@@ -15,7 +15,7 @@ const Hero = () => {
                     <div className="w-full lg:w-1/2 flex flex-col items-start text-left fade-in-up">
                         {/* Decorative Asset Removed */}
 
-                        <h1 className='font-bold text-xl'>Youth Research & Innovation Foundation</h1>
+                        <h1 className='text-xl'>Youth Research & Innovation Foundation</h1>
                         <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-[1.1] tracking-tight text-brand-navy">
                             Empowering Youth Through
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-gold"> Research & Innovation</span>

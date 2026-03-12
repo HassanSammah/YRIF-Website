@@ -33,8 +33,8 @@ const AboutSection = () => {
 
                     {/* Text Side */}
                     <div className="w-full lg:w-1/2">
-                        <h2 className="text-sm font-bold text-brand-teal uppercase tracking-wide mb-2">Our Mission</h2>
-                        <h3 className="text-3xl md:text-4xl font-bold text-brand-navy mb-6 leading-tight">Bridging the Gap Between <br /> Youth & National Development</h3>
+                        <h2 className="text-sm font-bold text-brand-teal uppercase tracking-wide mb-2">It is Our Mission</h2>
+                        <h3 className="text-3xl md:text-4xl font-bold text-brand-navy mb-6 leading-tight">To Bridge the Gap Between <br /> Youth & National Development</h3>
                         <p className="text-text-secondary text-lg mb-8 leading-relaxed">
                             YRIF is more than just a platform; it&apos;s a movement. We are dedicated to creating an ecosystem where young researchers can thrive, innovate, and contribute directly to Tanzania&apos;s growth.
                         </p>
