@@ -7,6 +7,8 @@ import ImpactMetrics from './ImpactMetrics';
 import MentorshipHighlight from './MentorshipHighlight';
 import Partners from './Partners';
 import CTASection from './CTASection';
+import FeedbackSection from './FeedbackSection';
+import UsefulLinks from './UsefulLinks';
 
 const Home = () => {
     return (
@@ -19,6 +21,8 @@ const Home = () => {
             <ImpactMetrics />
             <MentorshipHighlight />
             <Partners />
+            <UsefulLinks />
+            <FeedbackSection />
             <CTASection />
         </div>
     );
