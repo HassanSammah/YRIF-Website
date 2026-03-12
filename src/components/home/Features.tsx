@@ -23,7 +23,7 @@ const Features = () => {
                         <div className="w-full md:w-1/2 z-10">
                             <span className="text-brand-teal font-bold tracking-widest uppercase text-sm mb-4 block">Our Core Pillars</span>
                             <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                                bridging the gap between <span className="text-brand-teal">education</span> and <span className="text-brand-gold">innovation</span>.
+                                bridging the gap between <span className="text-brand-teal">knowledge</span> and <span className="text-brand-gold">innovation</span>.
                             </h2>
                             <p className="text-gray-300 text-lg leading-relaxed mb-8">
                                 We provide the essential infrastructure for young Tanzanians to thrive in the global knowledge economy.
