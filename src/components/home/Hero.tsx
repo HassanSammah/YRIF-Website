@@ -29,7 +29,7 @@ const Hero = () => {
                             <Link to="/register" className="bg-brand-navy text-white px-8 py-4 rounded-full text-lg font-semibold transition-all shadow-xl shadow-brand-navy/20 hover:shadow-brand-blue/30 hover:scale-105 hover:bg-brand-blue flex items-center justify-center gap-2">
                                 Join YRIF
                             </Link>
-                            <a href="#research" className="group px-8 py-4 rounded-full text-lg font-semibold border-2 border-brand-navy/10 hover:border-brand-navy/30 text-brand-navy transition-all flex items-center justify-center gap-2 bg-white/50 backdrop-blur-sm">
+                            <a href="/dashboard" className="group px-8 py-4 rounded-full text-lg font-semibold border-2 border-brand-navy/10 hover:border-brand-navy/30 text-brand-navy transition-all flex items-center justify-center gap-2 bg-white/50 backdrop-blur-sm">
                                 Explore Research
                                 <span className="group-hover:translate-x-1 transition-transform">→</span>
                             </a>
