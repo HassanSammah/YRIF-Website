@@ -1,8 +1,17 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, Heart } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import logo from '../../assets/images/logo_dark.png';
 import wideLogo from '../../assets/images/asset_5.svg';
+
+const NAV_ITEMS = [
+    { name: 'Home',     href: '/',          scroll: false },
+    { name: 'About',    href: '/#about',    scroll: true  },
+    { name: 'Programs', href: '/#features', scroll: true  },
+    { name: 'Research', href: '/#research', scroll: true  },
+    { name: 'Events',   href: '/#events',   scroll: true  },
+    { name: 'Partners', href: '/#partners', scroll: true  },
+];
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,125 +19,118 @@ const Header = () => {
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 20);
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    const handleScrollNav = (e: React.MouseEvent, hash: string) => {
+        e.preventDefault();
+        setIsMenuOpen(false);
+        const el = document.querySelector(hash);
+        el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
 
     return (
         <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'py-3 glass shadow-sm' : 'py-6 bg-transparent'}`}>
             <div className="container mx-auto px-6 md:px-12">
                 <div className="flex justify-between items-center">
                     {/* Logo */}
-                    <Link to="/" className="flex items-center space-x-2 group">
-                        <img src={logo} alt="YRIF Logo" className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105 md:hidden" />
-                        <img src={wideLogo} alt="YRIF Logo Wide" className="hidden md:block h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105" />
+                    <Link to="/" className="flex items-center group">
+                        <img src={logo}     alt="YRIF" className="h-10 w-auto object-contain transition-transform group-hover:scale-105 md:hidden" />
+                        <img src={wideLogo} alt="YRIF" className="hidden md:block h-10 w-auto object-contain transition-transform group-hover:scale-105" />
                     </Link>
 
-                    {/* Desktop Navigation */}
+                    {/* Desktop nav */}
                     <nav className="hidden md:flex items-center space-x-1">
-                        {[
-                            { name: 'Home', href: '/' },
-                            { name: 'About', href: '/#about' },
-                            { name: 'Programs', href: '/#features' },
-                            { name: 'Research', href: '/#research' },
-                            { name: 'Events', href: '/#events' },
-                            { name: 'Vacancies', href: '/vacancies' },
-                            { name: 'Donate', href: '/donate' }
-                        ].map((item) => (
-                            item.href.startsWith('/#') ? (
+                        {NAV_ITEMS.map(({ name, href, scroll }) =>
+                            scroll ? (
                                 <a
-                                    key={item.name}
-                                    href={item.href}
-                                    onClick={(e) => {
-                                        if (window.location.pathname === '/') {
-                                            e.preventDefault();
-                                            const element = document.querySelector(item.href.substring(1));
-                                            element?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                        }
-                                    }}
-                                    className="px-4 py-2 text-sm font-medium text-text-primary hover:text-brand-blue relative group transition-colors"
+                                    key={name}
+                                    href={href}
+                                    onClick={(e) => handleScrollNav(e, href.substring(1))}
+                                    className="px-4 py-2 text-sm font-medium text-text-primary hover:text-brand-teal relative group transition-colors"
                                 >
-                                    {item.name}
-                                    <span className="absolute bottom-1 left-4 right-4 h-0.5 bg-brand-gold scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center opacity-70"></span>
+                                    {name}
+                                    <span className="absolute bottom-1 left-4 right-4 h-0.5 bg-brand-gold scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center opacity-70" />
                                 </a>
                             ) : (
                                 <Link
-                                    key={item.name}
-                                    to={item.href}
-                                    className="px-4 py-2 text-sm font-medium text-text-primary hover:text-brand-blue relative group transition-colors"
+                                    key={name}
+                                    to={href}
+                                    className="px-4 py-2 text-sm font-medium text-text-primary hover:text-brand-teal relative group transition-colors"
                                 >
-                                    {item.name}
-                                    <span className="absolute bottom-1 left-4 right-4 h-0.5 bg-brand-gold scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center opacity-70"></span>
+                                    {name}
+                                    <span className="absolute bottom-1 left-4 right-4 h-0.5 bg-brand-gold scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center opacity-70" />
                                 </Link>
                             )
-                        ))}
+                        )}
                     </nav>
 
-                    {/* Auth & CTAs */}
+                    {/* Desktop CTAs */}
                     <div className="hidden md:flex items-center space-x-4">
-                        <Link to="/donate" className="flex items-center space-x-1 text-sm font-bold text-brand-gold hover:text-brand-blue transition-colors">
-                            <Heart size={16} className="fill-brand-gold/20" />
-                            <span>Support Us</span>
-                        </Link>
-                        <div className="w-px h-5 bg-gray-200"></div>
-                        <Link to="/login" className="px-5 py-2.5 text-sm font-semibold text-brand-navy hover:text-brand-blue transition-colors">Login</Link>
-                        <Link to="/register" className="bg-brand-navy hover:bg-brand-blue text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 shadow-lg shadow-brand-navy/20 hover:shadow-brand-blue/30 transform hover:-translate-y-0.5">
+                        <a
+                            href="/login"
+                            className="px-5 py-2.5 text-sm font-semibold text-brand-navy hover:text-brand-teal transition-colors"
+                        >
+                            Login
+                        </a>
+                        <a
+                            href="/register"
+                            className="bg-brand-navy hover:bg-brand-teal text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 shadow-lg shadow-brand-navy/20 transform hover:-translate-y-0.5"
+                        >
                             Join YRIF
-                        </Link>
+                        </a>
                     </div>
 
-                    {/* Mobile Menu Button */}
-                    <button className="md:hidden text-brand-navy hover:text-brand-blue transition-colors" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                    {/* Mobile menu toggle */}
+                    <button
+                        className="md:hidden text-brand-navy hover:text-brand-teal transition-colors"
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        aria-label="Toggle menu"
+                    >
                         {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
                     </button>
                 </div>
 
-                {/* Mobile Menu */}
+                {/* Mobile menu */}
                 {isMenuOpen && (
-                    <div className="md:hidden mt-4 bg-white/90 backdrop-blur-xl rounded-2xl p-6 shadow-2xl border border-white/20 animate-fade-in-down">
+                    <div className="md:hidden mt-4 bg-white/90 backdrop-blur-xl rounded-2xl p-6 shadow-2xl border border-white/20">
                         <div className="flex flex-col space-y-4">
-                            {[
-                                { name: 'Home', href: '/' },
-                                { name: 'About', href: '/#about' },
-                                { name: 'Programs', href: '/#features' },
-                                { name: 'Research', href: '/#research' },
-                                { name: 'Events', href: '/#events' },
-                                { name: 'Vacancies', href: '/vacancies' },
-                                { name: 'Donate', href: '/donate' },
-                                { name: 'Login', href: '/login' }
-                            ].map((item) => (
-                                item.href.startsWith('/#') ? (
+                            {NAV_ITEMS.map(({ name, href, scroll }) =>
+                                scroll ? (
                                     <a
-                                        key={item.name}
-                                        href={item.href}
-                                        onClick={(e) => {
-                                            if (window.location.pathname === '/') {
-                                                e.preventDefault();
-                                                setIsMenuOpen(false);
-                                                const element = document.querySelector(item.href.substring(1));
-                                                element?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                            } else {
-                                                setIsMenuOpen(false);
-                                            }
-                                        }}
-                                        className="text-lg font-medium text-brand-navy hover:text-brand-blue hover:pl-2 transition-all"
+                                        key={name}
+                                        href={href}
+                                        onClick={(e) => handleScrollNav(e, href.substring(1))}
+                                        className="text-lg font-medium text-brand-navy hover:text-brand-teal hover:pl-2 transition-all"
                                     >
-                                        {item.name}
+                                        {name}
                                     </a>
                                 ) : (
                                     <Link
-                                        key={item.name}
-                                        to={item.href}
-                                        className="text-lg font-medium text-brand-navy hover:text-brand-blue hover:pl-2 transition-all"
+                                        key={name}
+                                        to={href}
                                         onClick={() => setIsMenuOpen(false)}
+                                        className="text-lg font-medium text-brand-navy hover:text-brand-teal hover:pl-2 transition-all"
                                     >
-                                        {item.name}
+                                        {name}
                                     </Link>
                                 )
-                            ))}
-                            <Link to="/register" className="bg-brand-navy text-white px-6 py-3 rounded-xl text-center font-bold shadow-lg" onClick={() => setIsMenuOpen(false)}>
-                                Join YRIF
-                            </Link>
+                            )}
+                            <div className="pt-2 flex flex-col gap-2">
+                                <a
+                                    href="/login"
+                                    className="block text-center px-4 py-2.5 text-sm font-semibold border border-brand-navy text-brand-navy rounded-xl hover:bg-gray-50"
+                                >
+                                    Login
+                                </a>
+                                <a
+                                    href="/register"
+                                    className="block text-center bg-brand-navy text-white px-6 py-3 rounded-xl font-bold shadow-lg hover:bg-brand-teal transition-colors"
+                                >
+                                    Join YRIF
+                                </a>
+                            </div>
                         </div>
                     </div>
                 )}
